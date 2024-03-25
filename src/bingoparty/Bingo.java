@@ -59,7 +59,7 @@ public class Bingo {
      */
     public byte nextBall(){
         
-        if(drum.size() == 0)    //Si no quedan bolas devolvemos 0, representa el final del juego
+        if(drum.isEmpty())    //Si no quedan bolas devolvemos 0, representa el final del juego
             return 0;
         
         byte nextBall = (byte) ( Math.random() * (this.drum.size()-1) ); //Numero aleatorio entre 0 y el numero maximo del arraylist
@@ -67,6 +67,18 @@ public class Bingo {
         
         return tray.get(tray.size() -1 );
         
+    }
+    
+    /**
+     * Devuelve la ultima bola que salíó del bombo
+     * 
+     * @return el numero de la ultima bola, 0 si no hay ningun numero todavía
+     */
+    public byte lastBall(){
+        if(tray.isEmpty()){
+            return 0;
+        }
+        return tray.get(tray.size() -1);
     }
     
   
@@ -83,12 +95,8 @@ public class Bingo {
         
     }
     
-    public void consoleGame(){
-        
-       
-
-        
-        
+    public int getTimeNext(){
+        return this.timeNext;
     }
     
     
