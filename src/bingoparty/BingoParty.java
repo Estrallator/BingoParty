@@ -39,6 +39,10 @@ public class BingoParty{
         
     }
 
+    /**
+     * Lógica de partida desde un entorno de consola (Sin GUI)
+     * @param input 
+     */
     private static void consoleGame(BufferedReader input) {
         
         Bingo partida = new Bingo();    //Partida por defecto
@@ -48,18 +52,22 @@ public class BingoParty{
         System.out.println("Pulsa intro para comenzar");
         try{
             input.readLine();
-        }catch (Exception e){}
+        }catch (Exception e){
+            System.out.println(e);
+        }
         
-        System.out.println("*** COMIENZA! ***");
+        System.out.println("*** COMIENZA LA PARTIDA! ***");
         
         while(partida.nextBall() != 0){
+            player.playDrumEffect();
             while(ChronoUnit.SECONDS.between(t, LocalDateTime.now()) <= partida.getTimeNext() ) {   
                 pauseConsoleGameLogic(input);   
             }
         
             t = LocalDateTime.now();
-            System.out.println( partida.lastBall() );
             player.playNumber(partida.lastBall());
+            System.out.println( partida.lastBall() );
+  
         }
         
     }
