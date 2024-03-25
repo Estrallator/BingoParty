@@ -1,18 +1,13 @@
 
 package bingoparty;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
+
 
 /**
  *
@@ -49,19 +44,27 @@ public class BingoParty{
             input.readLine();
         }catch (Exception e){}
         
+        System.out.println("*** COMIENZA! ***");
         
-        while(true){
-            if (ChronoUnit.SECONDS.between(t, LocalDateTime.now()) >= 5 ){
-                t = LocalDateTime.now();
-                System.out.println( partida.nextBall() );
-            }
+        while(partida.nextBall() != 0){
+            while(ChronoUnit.SECONDS.between(t, LocalDateTime.now()) <= partida.getTimeNext() ) {
 
-            try{
-            if(input.ready()){  //Pausar 
-                input.readLine();
-                System.out.println("ploff");
+                try{
+                    if(input.ready()){  //Pausar 
+                        char o;
+                        input.readLine();
+                        System.out.println("**** Pausa **** \n\t Intro - continuar");
+                        o = (char) input.read();
+                        System.out.println(o);
+                    }
+                }catch(Exception e){
+                    System.out.println(e); 
+                }
+                
             }
-            }catch(Exception e){}
+        
+            t = LocalDateTime.now();
+            System.out.println( partida.lastBall() );
         }
         
     }
