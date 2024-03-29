@@ -24,7 +24,8 @@ public class ConsoleNumbers {
         String numberStr = Byte.toString(n);
         
         if( numberStr.length() == 1){
-            System.out.println(bigNums.get(Integer.valueOf(n)));
+            System.out.println(bigNums.get(Integer.valueOf(n)).replaceAll("[^\s\n]", "\u25A0").replaceAll("[\s]","\u25A1"));
+            System.out.println("\n");
         }
         else{
              
@@ -35,8 +36,15 @@ public class ConsoleNumbers {
             String[] n2 =  bigNums.get(index2).split("\n");
             
             
+            /*for ( int i = 0 ; i < n1.length ; i++){
+                System.out.println( (n1[i] + n2[i]) ) ;
+                
+            }*/
+            
+            // Unimos los 2 numeros en una sola cadena y sustituimos los caracteres por simbolos que emulan un panel digital 
             for ( int i = 0 ; i < n1.length ; i++){
-                System.out.println( n1[i] + n2[i] ) ;
+                
+                System.out.println( (n1[i] + n2[i]).replaceAll("[^\s\n]", "\u25A0").replaceAll("[\s]","\u25A1") ) ;
             }
             System.out.println("\n");
         }
